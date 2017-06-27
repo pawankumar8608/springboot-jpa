@@ -32,7 +32,7 @@ public class SecurityServiceImpl implements SecurityService{
 
 	@Override
 	public void autoLogin(String userName, String password) {
-           UserDetails userDetails = 	userDetailsService.loadUserByUsername(userName);
+           UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
            UsernamePasswordAuthenticationToken token= new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
            authenticationManager.authenticate(token);
          

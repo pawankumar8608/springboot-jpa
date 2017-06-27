@@ -21,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	private UserRepository userRepository;
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
 		User user = userRepository.findByUserName(userName);
@@ -31,8 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 			authorities.add(new SimpleGrantedAuthority(role.getName()));
 		}
 
-		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
-				authorities);
+		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
 	}
 
 	
